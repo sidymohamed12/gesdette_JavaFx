@@ -1,0 +1,15 @@
+persistence: "MYSQLDETTE"
+repository:
+  articleRepository: com.dette.repository.JPA.ArticleJPA
+  clientRepository: com.dette.repository.JPA.ClientJPA
+  userRepository: com.dette.repository.JPA.UserJPA
+  detteRepository: com.dette.repository.JPA.DetteJPA
+  detailRepository: com.dette.repository.JPA.DetailJPA
+  payementRepository: com.dette.repository.JPA.PayementJPA
+
+  # articleRepository: com.dette.repository.bd.ArticleRepositoryBD
+  # clientRepository: com.dette.repository.bd.ClientRepositoryBD
+  # userRepository: com.dette.repository.bd.UserRepositoryBD
+  # detteRepository: com.dette.repository.bd.DetteRepositoryBD
+  # detailRepository: com.dette.repository.bd.DetailRepositoryBD
+  # payementRepository: com.dette.repository.bd.PayementRepositoryBD

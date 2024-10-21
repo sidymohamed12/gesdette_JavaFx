@@ -1,0 +1,45 @@
+.check-box {
+  -fx-padding: 0;
+  -fx-background-radius: 50%;
+  -fx-border-color: #ccc;
+  -fx-border-radius: 20;
+  -fx-border-width: 2;
+  -fx-min-width: 70px;
+  -fx-min-height: 30px;
+  -fx-max-width: 70px;
+  -fx-max-height: 30px;
+}
+
+.check-box .box {
+  -fx-padding: 3;
+  -fx-border-color: transparent;
+  -fx-border-radius: 20;
+  -fx-background-radius: 50%;
+}
+
+.check-box:selected .box {
+  -fx-background-color: #4caf50;
+  -fx-background-radius: 50%;
+  -fx-border-radius: 20;
+}
+
+.check-box .mark {
+  -fx-background-color: rgb(255, 0, 0); /* Cercle blanc par défaut */
+  -fx-background-radius: 50%;
+  -fx-border-radius: 20;
+  -fx-padding: 4;
+  -fx-translate-x: 0;
+  -fx-min-width: 20px;
+  -fx-min-height: 18px;
+  -fx-max-width: 20px;
+  -fx-max-height: 18px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 5, 0, 0, 0);
+  -fx-transition: all 0.3s ease-in-out; /* Transition fluide */
+}
+
+.check-box:selected .mark {
+  -fx-background-color: #4caf50; /* Cercle vert lorsque activé */
+  -fx-translate-x: 40px; /* Déplacement à droite */
+  -fx-transition: all 0.3s ease-in-out; /* Transition fluide */
+  -fx-border-radius: 20;
+}
