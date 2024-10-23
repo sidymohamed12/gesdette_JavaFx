@@ -12,38 +12,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00c7ff;"
-   xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.dette.controllerFx.admin.ArticleTable">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.admin.ArticleTable">
    <children>
       <HBox prefHeight="34.0" prefWidth="600.0">
          <children>
-            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-               prefHeight="47.0" prefWidth="257.0"
-               style="-fx-border-color: white; -fx-border-width: 2;" text="User">
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="257.0" style="-fx-border-color: white; -fx-border-width: 2;" text="User">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadUserList" text="Liste User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat"
-                     text="activer/desactiver User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser"
-                     text="Creation d'un compte à un user" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat" text="activer/desactiver User" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser" text="Creation d'un compte à un user" />
                </items>
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </MenuButton>
-            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0"
-               prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;"
-               text="Article">
+            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0" prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;" text="Article">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0"
-               prefWidth="143.0"
-               style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;"
-               text="sign out" textFill="RED">
+            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0" prefWidth="143.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;" text="sign out" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
@@ -53,18 +41,13 @@
             </Button>
          </children>
       </HBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="68.0"
-         prefHeight="37.0" prefWidth="308.0" style="-fx-text-fill: white;" text="LISTE DES ARTICLES"
-         underline="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="68.0" prefHeight="37.0" prefWidth="308.0" text="LISTE DES ARTICLES" underline="true">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <ComboBox fx:id="filterComboBox" layoutX="53.0" layoutY="140.0" prefHeight="25.0"
-         prefWidth="109.0" promptText="filtrer" />
-      <Button layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#loadUpdateArticle"
-         prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: orange;"
-         text="update article" textFill="WHITE">
+      <ComboBox fx:id="filterComboBox" layoutX="53.0" layoutY="140.0" prefHeight="25.0" prefWidth="109.0" promptText="filtrer" />
+      <Button layoutX="300.0" layoutY="136.0" mnemonicParsing="false" onAction="#loadUpdateArticle" prefHeight="34.0" prefWidth="122.0" style="-fx-background-color: orange;" text="update article" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -72,9 +55,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="434.0" layoutY="135.0" mnemonicParsing="false" onAction="#loadAddArticle"
-         prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #22c900;"
-         text="add article" textFill="WHITE">
+      <Button layoutX="434.0" layoutY="135.0" mnemonicParsing="false" onAction="#loadAddArticle" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #22c900;" text="add article" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -82,8 +63,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="articleTable" layoutX="53.0" layoutY="186.0" prefHeight="200.0"
-         prefWidth="495.0">
+      <TableView fx:id="articleTable" layoutX="53.0" layoutY="186.0" prefHeight="200.0" prefWidth="495.0">
          <columns>
             <TableColumn fx:id="refColumn" prefWidth="90.0" text="ref" />
             <TableColumn fx:id="libelleColumn" prefWidth="185.99996948242188" text="Libelle" />

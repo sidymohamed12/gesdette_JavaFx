@@ -115,7 +115,7 @@ public class LinkClientUser extends AdminController {
             userService.create(user);
             clientService.modifier(client);
             showAlert(AlertType.INFORMATION, "Success", "compte créé pour le client avec success");
-            App.setRoot("listeUser.admin");
+            App.setRoot("adminVue/listeUser.admin");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Database Error", "Error while saving user: " + e.getMessage());

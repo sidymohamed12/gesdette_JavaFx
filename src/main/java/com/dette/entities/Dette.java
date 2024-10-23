@@ -32,6 +32,11 @@ public class Dette extends AbstractEntity {
 
     @Transient
     private Double montantRestant;
+
+    public Double getMontantRestant() {
+        return (this.montant - this.montantVerser);
+    }
+
     private Boolean archiver;
     private LocalDateTime date;
 
@@ -39,7 +44,7 @@ public class Dette extends AbstractEntity {
     @JoinColumn(name = "clientId")
     private Client clientD;
 
-    @Convert(converter = EtatConvert.class) 
+    @Convert(converter = EtatConvert.class)
     @Column(name = "etatId")
     private Etat etatD;
 
@@ -55,12 +60,13 @@ public class Dette extends AbstractEntity {
 
     public void addPayement(Payement pay) {
         payements.add(pay);
-        setMontantRestant(montant-montantVerser);
+        setMontantRestant(montant - montantVerser);
     }
 
     @Override
     public String toString() {
-        return "Dette [id=" + id + ", montant=" + montant + ", montantVerser=" + montantVerser + ", montantRestant=" + montantRestant
+        return "Dette [id=" + id + ", montant=" + montant + ", montantVerser=" + montantVerser + ", montantRestant="
+                + montantRestant
                 + ", date=" + date + ", clientD=" + clientD + ", etatD=" + etatD + "]";
     }
 

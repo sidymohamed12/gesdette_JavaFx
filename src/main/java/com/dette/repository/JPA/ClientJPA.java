@@ -11,20 +11,6 @@ public class ClientJPA extends RepositoryJpaImpl<Client> implements ClientReposi
         coloneSelectBy = "telephone";
     }
 
-    // public List<Dette> getDettesNonSoldeesByClient(int clientId) {
-
-    // String jpql = "SELECT d FROM Dette d " +
-    // "LEFT JOIN FETCH d.details dtl " +
-    // "JOIN FETCH dtl.article a " +
-    // "LEFT JOIN FETCH Payement p ON p.dette.id = d.id " +
-    // "WHERE d.client.id = :clientId " +
-    // "AND (d.montant - d.montantVerser) != 0";
-
-    // return entityManager.createQuery(jpql, Dette.class)
-    // .setParameter("clientId", clientId)
-    // .getResultList();
-    // }
-
     // -------------------------------------
 
     // public List<Dette> getDemandesDetteByEtat(Etat etat) {

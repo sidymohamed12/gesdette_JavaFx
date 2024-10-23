@@ -45,12 +45,11 @@ public class FormUser extends AdminController {
             return;
         }
 
-        // Créer un nouvel objet User
-        User newUser = new User(email, password, Role.getRole(role), true);
         try {
+            User newUser = new User(email, password, Role.getRole(role), true);
             userService.create(newUser);
             showAlert(AlertType.INFORMATION, "Success", "User registered successfully!");
-            App.setRoot("listeUser");
+            App.setRoot("adminVue/listeUser");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Database Error", "Error while saving user: " + e.getMessage());

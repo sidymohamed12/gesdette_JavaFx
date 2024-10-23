@@ -16,39 +16,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.admin.UpdateArticle">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.admin.UpdateArticle">
    <children>
-      <Separator layoutX="270.0" layoutY="47.0" orientation="VERTICAL" prefHeight="353.0"
-         prefWidth="7.0" style="-fx-background-color: black;" />
+      <Separator layoutX="270.0" layoutY="47.0" orientation="VERTICAL" prefHeight="353.0" prefWidth="7.0" style="-fx-background-color: black;" />
       <HBox prefHeight="34.0" prefWidth="600.0">
          <children>
-            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-               prefHeight="47.0" prefWidth="257.0"
-               style="-fx-border-color: white; -fx-border-width: 2;" text="User">
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="257.0" style="-fx-border-color: white; -fx-border-width: 2;" text="User">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadUserList" text="Liste User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat"
-                     text="activer/desactiver User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser"
-                     text="Creation d'un compte à un user" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat" text="activer/desactiver User" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser" text="Creation d'un compte à un user" />
                </items>
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </MenuButton>
-            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0"
-               prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;"
-               text="Article">
+            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0" prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;" text="Article">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0"
-               prefWidth="143.0"
-               style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;"
-               text="sign out" textFill="RED">
+            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0" prefWidth="143.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;" text="sign out" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
@@ -58,33 +46,26 @@
             </Button>
          </children>
       </HBox>
-      <SplitPane layoutY="47.0" prefHeight="353.0" prefWidth="271.0"
-         style="-fx-background-color: #00c7ff;">
+      <SplitPane layoutY="47.0" prefHeight="353.0" prefWidth="271.0" style="-fx-background-color: #00c7ff;">
          <items>
             <ImageView fitHeight="279.0" fitWidth="269.0">
                <image>
-                  <Image
-                     url="@\C:\Users\DELL\Documents\gesdetteFx\src\main\java\com\dette\image\update.png" />
+                  <Image url="@\C:\Users\DELL\Documents\gesdetteFx\src\main\java\com\dette\image\update.png" />
                </image>
             </ImageView>
          </items>
       </SplitPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="56.0"
-         prefHeight="37.0" prefWidth="308.0" style="-fx-text-fill: #00c7ff;" text="UPDATE ARTICLE"
-         underline="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="278.0" layoutY="56.0" prefHeight="37.0" prefWidth="308.0" text="UPDATE ARTICLE" underline="true">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="newQteField" layoutX="299.0" layoutY="296.0" prefHeight="32.0"
-         prefWidth="285.0" promptText="entrez quantité à ajouter">
+      <TextField fx:id="newQteField" layoutX="299.0" layoutY="296.0" prefHeight="32.0" prefWidth="285.0" promptText="entrez quantité à ajouter">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="submitButton" contentDisplay="CENTER" layoutX="369.0" layoutY="349.0"
-         mnemonicParsing="false" prefHeight="32.0" prefWidth="141.0"
-         style="-fx-background-color: #00AEFF;" text="enregistrer" textFill="WHITE">
+      <Button fx:id="submitButton" contentDisplay="CENTER" layoutX="369.0" layoutY="349.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #00AEFF;" text="enregistrer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -92,8 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="articleTable" layoutX="296.0" layoutY="151.0" prefHeight="109.0"
-         prefWidth="285.0">
+      <TableView fx:id="articleTable" layoutX="296.0" layoutY="151.0" prefHeight="109.0" prefWidth="285.0">
          <columns>
             <TableColumn fx:id="refColumn" prefWidth="62.66668701171875" text="ref" />
             <TableColumn fx:id="libelleColumn" prefWidth="96.0" text="libelle" />
@@ -101,14 +81,12 @@
             <TableColumn fx:id="prixColumn" prefWidth="70.66668701171875" text="prix" />
          </columns>
       </TableView>
-      <TextField fx:id="searchField" layoutX="300.0" layoutY="114.0" prefHeight="20.0"
-         prefWidth="165.0" promptText="entrez la ref de l'article" />
-      <Label layoutX="302.0" layoutY="272.0" text="quantité à ajouter" textFill="#00c7ff">
+      <TextField fx:id="searchField" layoutX="300.0" layoutY="114.0" prefHeight="20.0" prefWidth="165.0" promptText="entrez la ref de l'article" />
+      <Label layoutX="302.0" layoutY="272.0" text="quantité à ajouter">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="searchButton" layoutX="477.0" layoutY="114.0" mnemonicParsing="false"
-         prefHeight="20.0" prefWidth="77.0" text="rechercher" />
+      <Button fx:id="searchButton" layoutX="477.0" layoutY="114.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="77.0" text="rechercher" />
    </children>
 </Pane>

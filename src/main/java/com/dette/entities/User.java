@@ -8,7 +8,6 @@ import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-// import lombok.ToString;
 
 @Getter
 @Setter
@@ -30,6 +29,7 @@ public class User extends AbstractEntity {
     private Boolean etat;
 
     @OneToOne(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
     private Client client;
 
     public User(String login, String password, Role role, Boolean etat) {

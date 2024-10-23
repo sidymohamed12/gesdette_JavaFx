@@ -136,7 +136,7 @@ public class SetEtatUser extends AdminController {
             userService.modifier(user);
             showAlert(AlertType.INFORMATION, "Success", "L'état de l'utilisateur a été désactivé.");
             try {
-                App.setRoot("listeUser.admn");
+                App.setRoot("adminVue/listeUser.admn");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -147,7 +147,7 @@ public class SetEtatUser extends AdminController {
             userService.modifier(user);
             showAlert(AlertType.INFORMATION, "Success", "L'état de l'utilisateur a été activé.");
             try {
-                App.setRoot("listeUser.admin");
+                App.setRoot("adminVue/listeUser.admin");
             } catch (IOException e) {
                 e.printStackTrace();
             }

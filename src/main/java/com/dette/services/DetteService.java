@@ -2,6 +2,7 @@ package com.dette.services;
 
 import java.util.List;
 
+import com.dette.entities.Client;
 import com.dette.entities.Dette;
 import com.dette.repository.implement.DetteRepository;
 import com.dette.services.servicespe.IDetteService;
@@ -44,6 +45,11 @@ public class DetteService implements IDetteService {
     @Override
     public Dette getById(int id) {
         return detteRepository.selectById(id);
+    }
+
+    @Override
+    public List<Dette> detteOfClient(Client client) {
+        return detteRepository.detteOfClient(client);
     }
 
 }

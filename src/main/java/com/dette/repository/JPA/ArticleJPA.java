@@ -2,6 +2,8 @@ package com.dette.repository.JPA;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import com.dette.core.database.implement.RepositoryJpaImpl;
 import com.dette.entities.Article;
 import com.dette.entities.Dette;
@@ -21,6 +23,8 @@ public class ArticleJPA extends RepositoryJpaImpl<Article> implements ArticleRep
             return em.createQuery(sql, Article.class)
                     .setParameter("detteId", dette.getId())
                     .getResultList();
+        } catch (NoResultException e) {
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.dette.entities.User;
+import com.dette.entities.UserConnect;
 import com.dette.repository.JPA.UserJPA;
 import com.dette.services.UserService;
 
@@ -37,7 +38,6 @@ public class ConnexionController {
     private UserJPA userJPA;
 
     public ConnexionController() {
-
         this.userJPA = new UserJPA();
         this.userService = new UserService(userJPA);
     }
@@ -58,8 +58,11 @@ public class ConnexionController {
 
         try {
             User user = userService.getBy(email);
+
             if (user != null && BCrypt.checkpw(password, user.getPassword())) {
                 redirectToDashboard(user);
+                UserConnect.setUserConnecte(user);
+                System.out.println(UserConnect.getUserConnecte());
             } else {
                 showAlert("Erreur", "Email ou mot de passe incorrect", Alert.AlertType.ERROR);
             }
@@ -89,13 +92,13 @@ public class ConnexionController {
                 }
                 break;
             case boutiquier:
-                // System.out.println("acces à la vue boutiquier");
+                System.out.println("acces à la vue boutiquier");
 
-                // try {
-                // App.setRoot("listeClient.admin");
-                // } catch (IOException e) {
-                // e.printStackTrace();
-                // }
+                try {
+                    App.setRoot("boutiquierVue/listeClient");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case client:
                 // System.out.println("acces à la vue client");

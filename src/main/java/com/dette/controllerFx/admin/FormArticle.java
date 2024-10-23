@@ -49,7 +49,7 @@ public class FormArticle extends AdminController {
             Article article = new Article(libelle, Integer.parseInt(qteStock), Double.parseDouble(prix));
             articleService.create(article);
             showAlert(AlertType.INFORMATION, "Success", "article registered successfully!");
-            App.setRoot("listeArticle");
+            App.setRoot("adminVue/listeArticle");
 
         } catch (NumberFormatException e) {
 

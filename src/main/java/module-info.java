@@ -11,6 +11,7 @@ module com.dette {
     opens com.dette to javafx.fxml, lombok, java.sql, java.persistence, jbcrypt, org.yaml.snakeyaml;
     opens com.dette.entities to org.hibernate.orm.core;
     opens com.dette.controllerFx.admin to javafx.fxml;
+    opens com.dette.controllerFx.boutiquier to javafx.fxml;
 
     exports com.dette.entities;
     exports com.dette.enums to org.hibernate.orm.core;

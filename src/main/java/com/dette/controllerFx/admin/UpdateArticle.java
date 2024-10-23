@@ -118,7 +118,7 @@ public class UpdateArticle extends AdminController {
             }
             article.setQteStock(article.getQteStock() + qteInt);
             articleService.modifier(article);
-            App.setRoot("listeArticle");
+            App.setRoot("adminVue/listeArticle");
         } catch (NumberFormatException e) {
             showAlert(AlertType.ERROR, "Form Error!",
                     "La quantité doit être numérique.");

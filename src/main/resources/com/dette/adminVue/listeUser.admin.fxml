@@ -13,38 +13,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00c7ff;"
-   xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.dette.controllerFx.admin.UserTable">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.admin.UserTable">
    <children>
       <HBox prefHeight="34.0" prefWidth="600.0">
          <children>
-            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-               prefHeight="47.0" prefWidth="257.0"
-               style="-fx-border-color: white; -fx-border-width: 2;" text="User">
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="257.0" style="-fx-border-color: white; -fx-border-width: 2;" text="User">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadUserList" text="Liste User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat"
-                     text="activer/desactiver User" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser"
-                     text="Creation d'un compte à un user" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadSetEtat" text="activer/desactiver User" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadLinkClientUser" text="Creation d'un compte à un user" />
                </items>
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </MenuButton>
-            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0"
-               prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;"
-               text="Article">
+            <Button mnemonicParsing="false" onAction="#loadArticleList" prefHeight="47.0" prefWidth="199.0" style="-fx-border-width: 2; -fx-border-color: white;" text="Article">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0"
-               prefWidth="143.0"
-               style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;"
-               text="sign out" textFill="RED">
+            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="46.0" prefWidth="143.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-border-width: 3; -fx-border-color: red;" text="sign out" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
@@ -54,20 +42,14 @@
             </Button>
          </children>
       </HBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="66.0"
-         prefHeight="37.0" prefWidth="308.0" style="-fx-text-fill: white;" text="LISTE DES USERS"
-         underline="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="66.0" prefHeight="37.0" prefWidth="308.0" text="LISTE DES USERS" underline="true">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <ComboBox fx:id="selectRole" layoutX="50.0" layoutY="130.0" prefHeight="25.0"
-         prefWidth="106.0" promptText="filtrer role" />
-      <ComboBox fx:id="selectEtat" layoutX="172.0" layoutY="130.0" prefHeight="25.0"
-         prefWidth="106.0" promptText="filtrer etat" />
-      <Button layoutX="448.0" layoutY="127.0" mnemonicParsing="false" onAction="#loadAddUser"
-         prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #22c900;" text="add user"
-         textFill="WHITE">
+      <ComboBox fx:id="selectRole" layoutX="50.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" promptText="filtrer role" />
+      <ComboBox fx:id="selectEtat" layoutX="172.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" promptText="filtrer etat" />
+      <Button layoutX="448.0" layoutY="127.0" mnemonicParsing="false" onAction="#loadAddUser" prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #22c900;" text="add user" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -75,15 +57,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="userTable" layoutX="50.0" layoutY="173.0" prefHeight="206.0"
-         prefWidth="501.0" style="-fx-border-width: 1; -fx-border-color: white;">
+      <TableView fx:id="userTable" layoutX="50.0" layoutY="173.0" prefHeight="206.0" prefWidth="501.0" style="-fx-border-width: 1; -fx-border-color: white;">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="115.33334350585938"
-               style="-fx-font-size: 16px;" text="id" />
-            <TableColumn fx:id="loginColumn" prefWidth="243.33334350585938"
-               style="-fx-font-size: 16px;" text="login" />
-            <TableColumn fx:id="roleColumn" prefWidth="139.99993896484375"
-               style="-fx-font-size: 16px;" text="role" />
+            <TableColumn fx:id="idColumn" prefWidth="115.33334350585938" style="-fx-font-size: 16px;" text="id" />
+            <TableColumn fx:id="loginColumn" prefWidth="243.33334350585938" style="-fx-font-size: 16px;" text="login" />
+            <TableColumn fx:id="roleColumn" prefWidth="139.99993896484375" style="-fx-font-size: 16px;" text="role" />
          </columns>
          <opaqueInsets>
             <Insets />
