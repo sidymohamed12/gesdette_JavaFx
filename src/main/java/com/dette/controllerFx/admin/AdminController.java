@@ -3,23 +3,11 @@ package com.dette.controllerFx.admin;
 import java.io.IOException;
 
 import com.dette.App;
-import com.dette.repository.JPA.ArticleJPA;
-import com.dette.repository.JPA.ClientJPA;
-import com.dette.repository.JPA.UserJPA;
-import com.dette.services.ArticleService;
-import com.dette.services.ClientService;
-import com.dette.services.UserService;
-
+import com.dette.controllerFx.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class AdminController {
-    private UserJPA userJPA = new UserJPA();
-    protected UserService userService = new UserService(userJPA);
-    private ArticleJPA articleJPA = new ArticleJPA();
-    protected ArticleService articleService = new ArticleService(articleJPA);
-    private ClientJPA clientJPA = new ClientJPA();
-    protected ClientService clientService = new ClientService(clientJPA);
+public class AdminController extends Controller {
 
     public void loadUserList() {
         try {

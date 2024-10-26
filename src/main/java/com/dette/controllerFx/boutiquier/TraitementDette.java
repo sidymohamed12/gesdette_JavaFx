@@ -101,6 +101,17 @@ public class TraitementDette extends BoutiquierController {
 
     }
 
+    public void listeDette() {
+        List<Dette> ldettes = new ArrayList<Dette>();
+        for (Dette dette : dettes) {
+            if (dette.getEtatD() == Etat.encours) {
+                ldettes.add(dette);
+            }
+        }
+        detteList = FXCollections.observableArrayList(ldettes);
+        detteTable.setItems(detteList);
+    }
+
     private void searchDette(ActionEvent event) {
         String recherche = searchDetteField.getText();
         if (recherche.isEmpty()) {
@@ -116,7 +127,7 @@ public class TraitementDette extends BoutiquierController {
 
         try {
             dette = detteService.getById(id);
-            if (dette != null && dette.getEtatD() != Etat.annuler) {
+            if (dette != null && dette.getEtatD() == Etat.encours) {
                 detteList = FXCollections.observableArrayList(dette);
                 detteTable.setItems(detteList);
 
@@ -129,7 +140,8 @@ public class TraitementDette extends BoutiquierController {
                 articleTable.setItems(articleList);
                 detailTable.setItems(detailList);
             } else {
-                showAlert(AlertType.ERROR, "RECHERCHE", "aucune dette trouvé avec ce id");
+                showAlert(AlertType.ERROR, "RECHERCHE", "aucune demande de dette trouvé avec ce id");
+                dette = null;
                 return;
             }
 
@@ -137,17 +149,6 @@ public class TraitementDette extends BoutiquierController {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Database Error", e.getMessage());
         }
-    }
-
-    public void listeDette() {
-        List<Dette> ldettes = new ArrayList<Dette>();
-        for (Dette dette : dettes) {
-            if (dette.getEtatD() != Etat.annuler) {
-                ldettes.add(dette);
-            }
-        }
-        detteList = FXCollections.observableArrayList(ldettes);
-        detteTable.setItems(detteList);
     }
 
     private void update(ActionEvent event, Etat etat) {

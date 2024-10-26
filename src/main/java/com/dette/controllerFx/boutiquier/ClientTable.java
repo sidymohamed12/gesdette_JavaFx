@@ -72,6 +72,7 @@ public class ClientTable extends BoutiquierController {
 
             if (client == null) {
                 showAlert(AlertType.ERROR, "RECHERCHE", "aucun client trouvé avec ce numero");
+                searchField.clear();
                 return;
             } else {
                 clientList = FXCollections.observableArrayList(client);

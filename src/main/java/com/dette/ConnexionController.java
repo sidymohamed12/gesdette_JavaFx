@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import com.dette.entities.User;
 import com.dette.entities.UserConnect;
+import com.dette.repository.JPA.ClientJPA;
 import com.dette.repository.JPA.UserJPA;
 import com.dette.services.UserService;
 
@@ -34,7 +35,7 @@ public class ConnexionController {
     private Hyperlink guestLink;
 
     private UserService userService;
-
+    ClientJPA clientJPA = new ClientJPA();
     private UserJPA userJPA;
 
     public ConnexionController() {
@@ -58,11 +59,9 @@ public class ConnexionController {
 
         try {
             User user = userService.getBy(email);
-
+            UserConnect.setUserConnecte(user);
             if (user != null && BCrypt.checkpw(password, user.getPassword())) {
                 redirectToDashboard(user);
-                UserConnect.setUserConnecte(user);
-                System.out.println(UserConnect.getUserConnecte());
             } else {
                 showAlert("Erreur", "Email ou mot de passe incorrect", Alert.AlertType.ERROR);
             }
@@ -70,14 +69,6 @@ public class ConnexionController {
             showAlert("Erreur", "Une erreur est survenue lors de la connexion", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void handleGuestLinkAction(MouseEvent event) {
-
-        showAlert("Information", "Connexion en tant qu'invité", Alert.AlertType.INFORMATION);
-        redirectToGuestView();
-
     }
 
     private void redirectToDashboard(User user) {
@@ -101,22 +92,17 @@ public class ConnexionController {
                 }
                 break;
             case client:
-                // System.out.println("acces à la vue client");
+                System.out.println("acces à la vue client");
 
-                // try {
-                // App.setRoot("listeDette.admin");
-                // } catch (IOException e) {
-                // e.printStackTrace();
-                // }
+                try {
+                    App.setRoot("clientVue/listeDette");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
 
         }
 
-    }
-
-    private void redirectToGuestView() {
-        // Logique pour rediriger l'utilisateur en tant qu'invité
-        System.out.println("Redirection vers la vue Invité");
     }
 
     private void showAlert(String title, String content, Alert.AlertType type) {

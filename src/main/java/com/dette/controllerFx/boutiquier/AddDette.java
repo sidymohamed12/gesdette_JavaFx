@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 import javafx.scene.control.Alert.AlertType;
 
 public class AddDette extends BoutiquierController {
@@ -85,12 +86,36 @@ public class AddDette extends BoutiquierController {
     private void loadArticles() {
         articles.clear();
         articles.addAll(articleService.findAll());
+        selectArticle.setConverter(new StringConverter<Article>() {
+            @Override
+            public String toString(Article articleD) {
+                return articleD != null ? articleD.getLibelle() : "";
+            }
+
+            @Override
+            public Article fromString(String string) {
+                return null;
+            }
+        });
         selectArticle.setItems(articles);
     }
 
     private void loadClients() {
         clients.clear();
         clients.addAll(clientService.findAll());
+        selectClient.setConverter(new StringConverter<Client>() {
+
+            @Override
+            public String toString(Client cl) {
+                return cl != null ? cl.getSurnom() : "";
+            }
+
+            @Override
+            public Client fromString(String arg0) {
+                return null;
+            }
+
+        });
         selectClient.setItems(clients);
     }
 
@@ -101,13 +126,13 @@ public class AddDette extends BoutiquierController {
             dette.setMontantVerser(0.0);
             dette.setDate(LocalDateTime.now());
             dette.setArchiver(false);
-            dette.setEtatD(Etat.encours);
+            dette.setEtatD(Etat.accepter);
             dette.setClientD(client);
         }
 
         Article article = selectArticle.getValue();
-        if (article == null) {
-            showAlert(AlertType.ERROR, "Erreur", "Veuillez sélectionner un article.");
+        if (article == null || article.getQteStock() <= 0) {
+            showAlert(AlertType.ERROR, "Erreur", "Veuillez sélectionner un article disponible.");
             return;
         }
         int qte;
@@ -129,6 +154,8 @@ public class AddDette extends BoutiquierController {
                 .filter(detail -> detail.getArticle().equals(article))
                 .findFirst();
 
+        article.setQteStock(article.getQteStock() - qte);
+        articleService.modifier(article);
         if (existingDetail.isPresent()) {
             Detail detail = existingDetail.get();
             detail.setQteVendu(detail.getQteVendu() + qte);
@@ -139,13 +166,12 @@ public class AddDette extends BoutiquierController {
             detail.setMontantVendu(montantArticle);
             detail.setArticle(article);
             detail.setDette(dette);
-
+            dette.addDetail(detail);
             articlesDetail.add(article);
             details.add(detail);
         }
 
         dette.setMontant(dette.getMontant() + montantArticle);
-        dette.setMontantRestant(dette.getMontant());
 
         articleTable.setItems(FXCollections.observableArrayList(articlesDetail));
         detailTable.setItems(FXCollections.observableArrayList(details));
@@ -167,9 +193,21 @@ public class AddDette extends BoutiquierController {
             }
 
             dette.setClientD(client);
-            dette.setDetails(details);
-            details.forEach(detailService::create);
-            detteService.create(dette);
+            client.addDettes(dette);
+
+            details.forEach(detail -> {
+                if (detail.getId() != null) {
+                    detailService.modifier(detail);
+                } else {
+                    detailService.create(detail);
+                }
+            });
+
+            if (dette.getId() != null) {
+                detteService.modifier(dette);
+            } else {
+                detteService.create(dette);
+            }
             showAlert(AlertType.CONFIRMATION, "Succès", "La dette a été enregistrée avec succès.");
 
             App.setRoot("boutiquierVue/listeDette");

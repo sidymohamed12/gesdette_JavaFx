@@ -3,37 +3,12 @@ package com.dette.controllerFx.boutiquier;
 import java.io.IOException;
 
 import com.dette.App;
-import com.dette.repository.JPA.ArticleJPA;
-import com.dette.repository.JPA.ClientJPA;
-import com.dette.repository.JPA.DetailJPA;
-import com.dette.repository.JPA.DetteJPA;
-import com.dette.repository.JPA.PayementJPA;
-import com.dette.repository.JPA.UserJPA;
-import com.dette.services.ArticleService;
-import com.dette.services.ClientService;
-import com.dette.services.DetailService;
-import com.dette.services.DetteService;
-import com.dette.services.PayementService;
-import com.dette.services.UserService;
+import com.dette.controllerFx.Controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class BoutiquierController {
-
-    private ClientJPA clientJPA = new ClientJPA();
-    private DetteJPA detteJPA = new DetteJPA();
-    private PayementJPA payementJPA = new PayementJPA();
-    private ArticleJPA articleJPA = new ArticleJPA();
-    private DetailJPA detailJPA = new DetailJPA();
-    private UserJPA userJPA = new UserJPA();
-
-    protected ClientService clientService = new ClientService(clientJPA);
-    protected DetteService detteService = new DetteService(detteJPA);
-    protected PayementService payementService = new PayementService(payementJPA);
-    protected ArticleService articleService = new ArticleService(articleJPA);
-    protected DetailService detailService = new DetailService(detailJPA);
-    protected UserService userService = new UserService(userJPA);
+public class BoutiquierController extends Controller {
 
     public void menu() {
         System.out.println("1- Créer un client");

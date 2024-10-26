@@ -103,16 +103,17 @@ public class LinkClientUser extends AdminController {
             return;
         }
 
-        String login = loginField.getText();
-        String password = passwordField.getText();
-        if (login.isEmpty() || password.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "veuillez remplir tous les champs");
-            return;
-        }
-        User user = new User(login, password, Role.client, true, client);
-
         try {
+            String login = loginField.getText();
+            String password = passwordField.getText();
+            if ((login.isEmpty() || password.isEmpty()) && client == null) {
+                showAlert(AlertType.ERROR, "Form Error!", "veuillez remplir tous les champs");
+                return;
+            }
+            User user = new User(login, password, Role.client, true, client);
+
             userService.create(user);
+            client.setUser(user);
             clientService.modifier(client);
             showAlert(AlertType.INFORMATION, "Success", "compte créé pour le client avec success");
             App.setRoot("adminVue/listeUser.admin");

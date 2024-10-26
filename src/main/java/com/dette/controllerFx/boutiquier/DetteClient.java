@@ -8,12 +8,14 @@ import com.dette.entities.Client;
 import com.dette.entities.Detail;
 import com.dette.entities.Dette;
 import com.dette.entities.Payement;
+import com.dette.enums.Etat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,7 +32,7 @@ public class DetteClient extends BoutiquierController {
     private Button submitSearchClient;
     private Client client;
 
-    // --------------------- INFOS AVANT TABLEAU DETTE -------------------------
+    // --------------------- INFOS CLIENT -------------------------
     @FXML
     private TextField surnomFlied;
     @FXML
@@ -101,6 +103,8 @@ public class DetteClient extends BoutiquierController {
     private TableColumn<Payement, LocalDateTime> dateColumnP;
     @FXML
     private TableColumn<Payement, Double> montantColumnP;
+    @FXML
+    private ComboBox<String> selectFiltre;
 
     private ObservableList<Payement> payementList;
 
@@ -124,6 +128,10 @@ public class DetteClient extends BoutiquierController {
         idColumnP.setCellValueFactory(new PropertyValueFactory<>("id"));
         montantColumnP.setCellValueFactory(new PropertyValueFactory<>("montant"));
         dateColumnP.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        selectFiltre.getItems().addAll("all", "solder", "non-solder");
+        selectFiltre.getSelectionModel().select("all");
+        selectFiltre.setOnAction(event -> filtreDette(event));
 
         submitSearchClient.setOnAction(event -> getDetteClientBySearch(event));
         submitSearchDette.setOnAction(event -> getArtPayDette(event));
@@ -149,9 +157,14 @@ public class DetteClient extends BoutiquierController {
             adresseField.setText(client.getAdresse());
 
             dettes = detteService.detteOfClient(client);
-            detteList = FXCollections.observableArrayList(dettes);
+            detteList = FXCollections.observableArrayList();
+            for (Dette detteB : dettes) {
+                if (detteB.getEtatD() == Etat.accepter) {
+                    detteList.add(detteB);
+                }
+            }
             detteTable.setItems(detteList);
-            infosDette(dettes);
+            infosDette(detteList);
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Database Error", "Client/dettes nnot found" + e.getMessage());
@@ -171,18 +184,29 @@ public class DetteClient extends BoutiquierController {
             return;
         }
 
-        Integer id = Integer.parseInt(rechercheDette);
-        if (id == null || id <= 0) {
-            showAlert(AlertType.ERROR, "Form Error!", "L'id doitt être positif.");
-            return;
-        }
-
         try {
-            dette = detteService.getById(id);
-            if (dette == null) {
-                showAlert(AlertType.ERROR, "RECHERCHE", "aucune dette trouvé avec ce id");
+            Integer id = Integer.parseInt(rechercheDette);
+            if (id == null || id <= 0) {
+                showAlert(AlertType.ERROR, "Form Error!", "L'id doitt être positif.");
                 return;
             }
+
+            dette = detteService.getById(id);
+            if (dette == null) {
+                showAlert(AlertType.ERROR, "RECHERCHE", "aucune dette trouvé avec ce id pour ce client");
+                return;
+            }
+
+            if (!dette.getClientD().getId().equals(client.getId())) {
+                showAlert(AlertType.ERROR, "Erreur", "Cette dette n'appartient pas au client recherché.");
+                return;
+            }
+
+            if (dette.getEtatD() != Etat.accepter) {
+                showAlert(AlertType.ERROR, "Erreur", "La dette de ce client n'est pas acceptée.");
+                return;
+            }
+
             List<Article> articles = articleService.getArticlesDette(dette);
             List<Payement> payments = payementService.getPayementsDette(dette);
             List<Detail> details = detailService.getDetailOfArticleDette(articles, dette);
@@ -212,5 +236,20 @@ public class DetteClient extends BoutiquierController {
         montantField.setText(total + " FCFA");
         verserField.setText(verser + " FCFA");
         restantField.setText(restant + " FCFA");
+    }
+
+    private void filtreDette(ActionEvent event) {
+        String selected = selectFiltre.getSelectionModel().getSelectedItem();
+        ObservableList<Dette> detteFiltres = FXCollections.observableArrayList();
+        for (Dette detteb : detteList) {
+            if ("solder".equals(selected) && detteb.getMontant().equals(detteb.getMontantVerser())) {
+                detteFiltres.add(detteb);
+            } else if ("non-solder".equals(selected) && !detteb.getMontantRestant().equals(0.0)) {
+                detteFiltres.add(detteb);
+            } else if ("all".equals(selected)) {
+                detteFiltres.add(detteb);
+            }
+        }
+        detteTable.setItems(detteFiltres);
     }
 }

@@ -49,7 +49,7 @@ public class FormUser extends AdminController {
             User newUser = new User(email, password, Role.getRole(role), true);
             userService.create(newUser);
             showAlert(AlertType.INFORMATION, "Success", "User registered successfully!");
-            App.setRoot("adminVue/listeUser");
+            App.setRoot("adminVue/listeUser.admin");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Database Error", "Error while saving user: " + e.getMessage());

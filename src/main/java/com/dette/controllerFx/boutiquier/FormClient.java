@@ -71,7 +71,7 @@ public class FormClient extends BoutiquierController {
                 return;
             }
             try {
-                Client client = new Client(adresse, tel, surnom, null);
+                Client client = new Client(surnom, tel, adresse, null);
                 clientService.create(client);
                 User user = new User(login, password, Role.client, true, client); // si ça marche pas enlever client
                 userService.create(user);

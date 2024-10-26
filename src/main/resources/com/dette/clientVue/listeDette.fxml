@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.client.ListeDette">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="997.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="231.0" layoutY="67.0" prefHeight="35.0" prefWidth="150.0"
+               text="Dette Client" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <SplitPane dividerPositions="0.463481228668942" layoutX="60.0" layoutY="142.0"
+               prefHeight="117.0" prefWidth="491.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="28.0" text="Surnom :" />
+                        <Label layoutX="14.0" layoutY="57.0" text="Tel :" />
+                        <Label layoutX="14.0" layoutY="87.0" text="Adresse :" />
+                        <Label layoutX="102.0" layoutY="4.0" text="infos client" underline="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="surnomFlied" disable="true" layoutX="80.0" layoutY="28.0"
+                           maxHeight="18.0" minHeight="18.0" prefHeight="18.0" prefWidth="97.0" />
+                        <TextField fx:id="telField" disable="true" layoutX="80.0" layoutY="57.0"
+                           maxHeight="18.0" minHeight="18.0" prefHeight="18.0" prefWidth="97.0" />
+                        <TextField fx:id="adresseField" disable="true" layoutX="80.0" layoutY="87.0"
+                           maxHeight="18.0" minHeight="18.0" prefHeight="18.0" prefWidth="97.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="115.0" prefWidth="265.0">
+                     <children>
+                        <Label layoutX="29.0" layoutY="32.0" text="Montant Total :" />
+                        <Label layoutX="29.0" layoutY="60.0" text="Montant Verser :" />
+                        <Label layoutX="29.0" layoutY="87.0" text="Montant Restant :" />
+                        <Label layoutX="100.0" layoutY="4.0" text="infos dettes" underline="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="montantField" disable="true" editable="false"
+                           layoutX="152.0" layoutY="32.0" maxHeight="18.0" minHeight="18.0"
+                           prefHeight="18.0" prefWidth="86.0" />
+                        <TextField fx:id="verserField" disable="true" layoutX="152.0" layoutY="60.0"
+                           maxHeight="18.0" minHeight="18.0" prefHeight="18.0" prefWidth="86.0" />
+                        <TextField fx:id="restantField" disable="true" layoutX="152.0"
+                           layoutY="87.0" maxHeight="18.0" minHeight="18.0" prefHeight="18.0"
+                           prefWidth="86.0" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <Label layoutX="244.0" layoutY="319.0" text="LES DETTES " underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="detteTable" layoutX="30.0" layoutY="360.0" prefHeight="159.0"
+               prefWidth="539.0">
+               <columns>
+                  <TableColumn fx:id="idColumn" prefWidth="35.33334159851074" text="Id" />
+                  <TableColumn fx:id="dateColumn" prefWidth="140.66669464111328" text="Date" />
+                  <TableColumn fx:id="montantColumn" prefWidth="107.99992370605469" text="Montant" />
+                  <TableColumn fx:id="verserColumn" prefWidth="124.0" text="Montant Verser" />
+                  <TableColumn fx:id="restantColumn" prefWidth="132.0" text="Montant Restant" />
+               </columns>
+            </TableView>
+            <TextField fx:id="searchDette" layoutX="35.0" layoutY="547.0"
+               promptText="entrez l'id de le dette" />
+            <Button fx:id="submitSearchDette" layoutX="200.0" layoutY="547.0"
+               mnemonicParsing="false" text="recherche" />
+            <Label layoutX="270.0" layoutY="580.0" text="Articles" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="articleTable" layoutX="30.0" layoutY="615.0" prefHeight="159.0"
+               prefWidth="367.0">
+               <columns>
+                  <TableColumn fx:id="refColumn" prefWidth="72.0" text="ref" />
+                  <TableColumn fx:id="libelleColumn" prefWidth="92.6667251586914" text="Libelle" />
+                  <TableColumn fx:id="qteStockColumn" prefWidth="86.66661071777344" text="qteStock" />
+                  <TableColumn fx:id="prixColumn" prefWidth="112.6666259765625" text="Prix unitaire" />
+               </columns>
+            </TableView>
+            <TableView fx:id="detailTable" layoutX="396.0" layoutY="615.0" prefHeight="159.0"
+               prefWidth="169.0">
+               <columns>
+                  <TableColumn fx:id="qteVenduColumn" prefWidth="75.0" text="QteVendu" />
+                  <TableColumn fx:id="totalColumn" prefWidth="92.00003051757812" text="Total" />
+               </columns>
+            </TableView>
+            <Label layoutX="250.0" layoutY="785.0" text="Payements" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="payementTable" layoutX="30.0" layoutY="823.0" prefHeight="159.0"
+               prefWidth="532.0">
+               <columns>
+                  <TableColumn fx:id="idColumnP" prefWidth="136.0" text="id" />
+                  <TableColumn fx:id="dateColumnP" prefWidth="195.33334350585938" text="Date" />
+                  <TableColumn fx:id="montantColumnP" prefWidth="198.6666259765625" text="Montant" />
+               </columns>
+            </TableView>
+            <HBox prefHeight="49.0" prefWidth="587.0">
+               <children>
+                  <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="49.0"
+                     prefWidth="437.0" text="Dette">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#loadDetteClient"
+                           text="Liste Dette" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadDemandeClient"
+                           text="Liste Demande Dette" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadDetteRelance"
+                           text="Faire Une relance d'une Dette Anuuler" />
+                     </items>
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="49.0"
+                     prefWidth="150.0" style="-fx-background-color: RED;" text="Sign out"
+                     textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

@@ -94,12 +94,14 @@ public class AddPayement extends BoutiquierController {
 
         try {
             dette = detteService.getById(id);
-            if (dette != null && dette.getEtatD() == Etat.accepter && dette.getMontant() != dette.getMontantVerser()
+            if (dette != null && dette.getEtatD() == Etat.accepter
+                    && !dette.getMontant().equals(dette.getMontantVerser())
                     && dette.getArchiver() == false) {
                 detteList = FXCollections.observableArrayList(dette);
                 detteTable.setItems(detteList);
             } else {
                 showAlert(AlertType.ERROR, "RECHERCHE", "aucune dette non-soldé accepté trouvé avec ce id");
+                dette = null;
                 return;
             }
         } catch (Exception e) {

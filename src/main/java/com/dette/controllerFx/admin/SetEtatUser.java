@@ -121,12 +121,12 @@ public class SetEtatUser extends AdminController {
         boolean switchEtat = toggleSwitch.isSelected();
 
         if (etatUser && switchEtat) {
-            showAlert(AlertType.INFORMATION, "Info", "L'état de l'utilisateur est déjà activé.");
+            showAlert(AlertType.ERROR, "Info", "L'état de l'utilisateur est déjà activé.");
             return;
         }
 
         if (!etatUser && !switchEtat) {
-            showAlert(AlertType.INFORMATION, "Info", "L'état de l'utilisateur est déjà desactivé.");
+            showAlert(AlertType.ERROR, "Info", "L'état de l'utilisateur est déjà desactivé.");
             return;
         }
 
@@ -136,7 +136,7 @@ public class SetEtatUser extends AdminController {
             userService.modifier(user);
             showAlert(AlertType.INFORMATION, "Success", "L'état de l'utilisateur a été désactivé.");
             try {
-                App.setRoot("adminVue/listeUser.admn");
+                App.setRoot("adminVue/listeUser.admin");
             } catch (IOException e) {
                 e.printStackTrace();
             }

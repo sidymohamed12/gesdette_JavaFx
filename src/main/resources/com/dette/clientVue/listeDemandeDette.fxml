@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+   xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="com.dette.controllerFx.client.DemandeDette">
+   <children>
+      <HBox prefHeight="49.0" prefWidth="600.0">
+         <children>
+            <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="49.0"
+               prefWidth="447.0" text="Dette">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#loadDetteClient" text="Liste Dette" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDemandeClient"
+                     text="Liste Demande Dette" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDetteRelance"
+                     text="Faire Une relance d'une Dette Anuuler" />
+               </items>
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </MenuButton>
+            <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="49.0"
+               prefWidth="165.0" style="-fx-background-color: RED;" text="Sign out" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="195.0" layoutY="71.0" prefHeight="35.0" prefWidth="210.0" text="DEMANDE DETTE"
+         underline="true">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="detteTable" layoutX="29.0" layoutY="169.0" prefHeight="200.0"
+         prefWidth="539.0">
+         <columns>
+            <TableColumn fx:id="dateColumn" prefWidth="139.99996948242188" text="Date" />
+            <TableColumn fx:id="montantColumn" prefWidth="138.66664123535156" text="Montant" />
+            <TableColumn fx:id="montantVerserColumn" prefWidth="128.0" text="Montant Verser" />
+            <TableColumn fx:id="montantRestantColumn" prefWidth="130.66671752929688"
+               text="Montant Restant" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="selectFiltre" layoutX="33.0" layoutY="134.0" prefHeight="25.0"
+         prefWidth="93.0" />
+      <Button layoutX="499.0" layoutY="134.0" mnemonicParsing="false" onAction="#loadDetteForm"
+         text="add dette">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
