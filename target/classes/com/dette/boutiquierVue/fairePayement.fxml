@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.dette.controllerFx.boutiquier.AddPayement">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
+            <children>
+                <HBox prefHeight="49.0" prefWidth="600.0">
+                    <children>
+                        <Button onAction="#loadClientListe" mnemonicParsing="false"
+                            prefHeight="49.0"
+                            prefWidth="150.0" text="Client">
+                            <font>
+                                <Font name="System Bold Italic" size="22.0" />
+                            </font>
+                        </Button>
+                        <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="49.0"
+                            prefWidth="150.0" text="Dette">
+                            <items>
+                                <MenuItem onAction="#loadDetteListe" mnemonicParsing="false"
+                                    text="Liste Dette" />
+                                <MenuItem onAction="#loadDetteClient" mnemonicParsing="false"
+                                    text="Voir Dette d'un Client" />
+                                <MenuItem onAction="#loadTraitement" mnemonicParsing="false"
+                                    text="Traitement/Voir Article d'une Dette" />
+                            </items>
+                            <font>
+                                <Font name="System Bold Italic" size="22.0" />
+                            </font>
+                        </MenuButton>
+                        <Button onAction="#loadPayementForm" mnemonicParsing="false"
+                            prefHeight="49.0"
+                            prefWidth="150.0"
+                            text="Payement">
+                            <font>
+                                <Font name="System Bold Italic" size="22.0" />
+                            </font>
+                        </Button>
+                        <Button onAction="#deconnected" mnemonicParsing="false" prefHeight="49.0"
+                            prefWidth="150.0"
+                            style="-fx-background-color: RED;" text="Sign out" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold Italic" size="22.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <Label layoutX="193.0" layoutY="67.0" prefHeight="35.0" prefWidth="214.0"
+                    text="PAYEMENT DETTE" underline="true">
+                    <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="searchDetteField" layoutX="30.0" layoutY="125.0" prefHeight="25.0"
+                    prefWidth="173.0" promptText="recherche dette par id" />
+                <Button fx:id="submitSearchDette" layoutX="223.0" layoutY="126.0"
+                    mnemonicParsing="false" text="rechercher" />
+                <TableView fx:id="detteTable" layoutX="23.0" layoutY="165.0" prefHeight="159.0"
+                    prefWidth="539.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="35.33334159851074" text="Id" />
+                        <TableColumn fx:id="dateColumn" prefWidth="140.66669464111328" text="Date" />
+                        <TableColumn fx:id="montantColumn" prefWidth="107.99992370605469"
+                            text="Montant" />
+                        <TableColumn fx:id="verserColumn" prefWidth="124.0" text="Montant Verser" />
+                        <TableColumn fx:id="restantColumn" prefWidth="132.0" text="Montant Restant" />
+                    </columns>
+                </TableView>
+                <Label layoutX="28.0" layoutY="342.0" text="Montant à payer  : ">
+                    <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="montantPayement" layoutX="220.0" layoutY="346.0" prefHeight="25.0"
+                    prefWidth="129.0" promptText="entrez le prix à payer" />
+                <Button fx:id="submitPayement" layoutX="364.0" layoutY="346.0"
+                    mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0"
+                    style="-fx-background-color: green;" text="payer" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>

@@ -1,0 +1,8 @@
+persistence: "POSTGRESDETTE"
+repository:
+  articleRepository: com.dette.repository.JPA.ArticleJPA
+  clientRepository: com.dette.repository.JPA.ClientJPA
+  userRepository: com.dette.repository.JPA.UserJPA
+  detteRepository: com.dette.repository.JPA.DetteJPA
+  detailRepository: com.dette.repository.JPA.DetailJPA
+  payementRepository: com.dette.repository.JPA.PayementJPA

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dette.controllerFx.boutiquier.AddDette">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="49.0" prefWidth="600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#loadClientListe" prefHeight="49.0" prefWidth="150.0" text="Client">
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </Button>
+                  <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="49.0" prefWidth="150.0" text="Dette">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#loadDetteListe" text="Liste Dette" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadDetteClient" text="Voir Dette d'un Client" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadTraitement" text="Traitement/Voir Article d'une Dette" />
+                     </items>
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" onAction="#loadPayementForm" prefHeight="49.0" prefWidth="150.0" text="Payement">
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#deconnected" prefHeight="49.0" prefWidth="150.0" style="-fx-background-color: RED;" text="Sign out" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label layoutX="165.0" layoutY="66.0" prefHeight="32.0" prefWidth="269.0" text="CREATION D'UNE DETTE" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="selectClient" layoutX="220.0" layoutY="120.0" prefHeight="25.0" prefWidth="160.0" promptText="selectionner le client" />
+            <SplitPane dividerPositions="0.4241573033707865" layoutX="30.0" layoutY="163.0" orientation="VERTICAL" prefHeight="121.0" prefWidth="535.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="533.0">
+                     <children>
+                        <Label layoutX="105.0" layoutY="5.0" text="Ajout d'articles dans une dette" underline="true">
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="53.0" prefWidth="533.0">
+                     <children>
+                        <ComboBox fx:id="selectArticle" layoutX="42.0" layoutY="19.0" prefHeight="30.0" prefWidth="126.0" />
+                        <TextField fx:id="qteAchete" layoutX="194.0" layoutY="19.0" prefHeight="30.0" prefWidth="149.0" promptText="entrez la quantité achetée" />
+                        <Button fx:id="buttonAjoutArticle" layoutX="362.0" layoutY="19.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" text="ajouter article">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <Label layoutX="194.0" layoutY="307.0" prefHeight="30.0" prefWidth="212.0" text="LISTE ARTICLES SELECTIONNES" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <TableView fx:id="articleTable" layoutX="26.0" layoutY="347.0" prefHeight="159.0" prefWidth="367.0">
+               <columns>
+                  <TableColumn fx:id="refColumn" prefWidth="72.0" text="ref" />
+                  <TableColumn fx:id="libelleColumn" prefWidth="92.6667251586914" text="Libelle" />
+                  <TableColumn fx:id="qteStockColumn" prefWidth="86.66661071777344" text="qteStock" />
+                  <TableColumn fx:id="prixColumn" prefWidth="112.6666259765625" text="Prix unitaire" />
+               </columns>
+            </TableView>
+            <TableView fx:id="detailTable" layoutX="392.0" layoutY="347.0" prefHeight="159.0" prefWidth="169.0">
+               <columns>
+                  <TableColumn fx:id="qteVenduColumn" prefWidth="75.0" text="QteVendu" />
+                  <TableColumn fx:id="totalColumn" prefWidth="92.00003051757812" text="Total" />
+               </columns>
+            </TableView>
+            <Button fx:id="submitDette" layoutX="237.0" layoutY="525.0" mnemonicParsing="false" text="ENREGISTRER">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
