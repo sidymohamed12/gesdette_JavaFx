@@ -44,11 +44,9 @@ public class FormClient extends BoutiquierController {
         String surnom = surnomField.getText();
         Boolean select = checkBoxUser.isSelected();
 
-        if (adresse.isEmpty() || tel.isEmpty() || surnom.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Compléter tous les champs clients");
-            return;
-
-        }
+        isEmpty(adresse, "ERREUR SUBMIT", "Veuillez saisir le champ Adresse");
+        isEmpty(tel, "ERREUR SUBMIT", "Veuillez saisir le champ Telephone");
+        isEmpty(surnom, "ERREUR SUBMIT", "Veuillez saisir le champ Surnom");
 
         if (!select) {
             try {
@@ -66,10 +64,10 @@ public class FormClient extends BoutiquierController {
             passwordField.setDisable(false);
             String login = loginField.getText();
             String password = passwordField.getText();
-            if (login.isEmpty() || password.isEmpty()) {
-                showAlert(AlertType.ERROR, "Form Error!", "Compléter tous les champs du user");
-                return;
-            }
+
+            isEmpty(login, "ERREUR SUBMIT", "Veuillez saisir le champ Login");
+            isEmpty(password, "ERREUR SUBMIT", "Veuillez saisir le champ Password");
+
             try {
                 Client client = new Client(surnom, tel, adresse, null);
                 clientService.create(client);

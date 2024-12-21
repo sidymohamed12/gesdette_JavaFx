@@ -34,18 +34,15 @@ public class FormArticle extends AdminController {
         String prix = prixField.getText();
         String qteStock = qteStockField.getText();
         String libelle = libelleField.getText();
-        if (qteStock.isEmpty() || libelle.isEmpty() || prix.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please fill all the fields");
-            return;
-        }
+
         try {
             int qteStockInt = Integer.parseInt(qteStock);
             double prixDouble = Double.parseDouble(prix);
 
-            if (qteStockInt <= 0 || prixDouble <= 0) {
-                showAlert(AlertType.ERROR, "Form Error!", "La quantité et le prix doivent être positifs.");
-                return;
-            }
+            isEmpty(libelle, "ERREUR FORMULAIRE", "Complétez les champs vides");
+            isPositif(qteStockInt, "ERREUR FORMULAIRE", "La quantité doit être positif.");
+            isPositif(prixDouble, "ERREUR FORMULAIRE", "Le prix doit être positif.");
+
             Article article = new Article(libelle, Integer.parseInt(qteStock), Double.parseDouble(prix));
             articleService.create(article);
             showAlert(AlertType.INFORMATION, "Success", "article registered successfully!");

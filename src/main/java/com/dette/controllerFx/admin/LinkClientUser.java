@@ -72,10 +72,7 @@ public class LinkClientUser extends AdminController {
     private void clientSearch(ActionEvent event) {
         String recherche = searchField.getText();
 
-        if (recherche.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "veuillez saisir le telephone du client");
-            return;
-        }
+        isEmpty(recherche, "ERREUR RECHERCHE", "veuillez saisir le telephone du client");
 
         try {
             client = clientService.getBy(recherche);
@@ -97,19 +94,18 @@ public class LinkClientUser extends AdminController {
     }
 
     private void createUser(ActionEvent event) {
-        if (client == null || client.getUser() != null) {
-            showAlert(AlertType.ERROR, "Error",
-                    "Veuillez d'abord rechercher et sélectionner un client qui n'a pas de compte.");
-            return;
-        }
+
+        isNull(client, "ERREUR SUBMIT", "Veuillez d'abord rechercher un client");
+        isNull(client.getUser(), "ERREUR SUBMIT", "Veuillez sélectionner un client qui n'a pas de compte");
 
         try {
             String login = loginField.getText();
             String password = passwordField.getText();
-            if ((login.isEmpty() || password.isEmpty()) && client == null) {
-                showAlert(AlertType.ERROR, "Form Error!", "veuillez remplir tous les champs");
-                return;
-            }
+
+            isEmpty(login, "ERREUR RECHERCHE", "veuillez remplir tous les champs");
+            isEmpty(password, "ERREUR RECHERCHE", "veuillez remplir tous les champs");
+            isNull(client, "ERREUR RECHERCHE", "veuillez remplir tous les champs");
+
             User user = new User(login, password, Role.client, true, client);
 
             userService.create(user);

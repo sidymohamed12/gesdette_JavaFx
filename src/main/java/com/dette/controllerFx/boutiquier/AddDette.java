@@ -131,10 +131,10 @@ public class AddDette extends BoutiquierController {
         }
 
         Article article = selectArticle.getValue();
-        if (article == null || article.getQteStock() <= 0) {
-            showAlert(AlertType.ERROR, "Erreur", "Veuillez sélectionner un article disponible.");
-            return;
-        }
+
+        isNull(article, "ERREUR AJOUT ARTICLE", "Veuillez sélectionner un article.");
+        isPositif(article.getQteStock(), "ERREUR AJOUT ARTICLE", "Veuillez sélectionner un article disponible.");
+
         int qte;
         try {
             qte = Integer.parseInt(qteAchete.getText());
@@ -187,10 +187,7 @@ public class AddDette extends BoutiquierController {
                 return;
             }
 
-            if (client == null) {
-                showAlert(AlertType.ERROR, "Erreur", "Aucun client celectionné à la dette.");
-                return;
-            }
+            isNull(client, "Erreur Submit", "Aucun client celectionné à la dette.");
 
             dette.setClientD(client);
             client.addDettes(dette);

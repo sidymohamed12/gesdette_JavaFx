@@ -140,18 +140,13 @@ public class DetteClient extends BoutiquierController {
     private void getDetteClientBySearch(ActionEvent event) {
 
         String rechercheClient = searchClient.getText();
-        if (rechercheClient.isEmpty()) {
-            showAlert(AlertType.ERROR, "CHAMP VIDE", "veuiller saisir un numero de téléphone");
-            return;
-        }
+        isEmpty(rechercheClient, "CHAMP VIDE", "veuiller saisir le numero de téléphone du client");
 
         try {
             client = clientService.getBy(rechercheClient);
 
-            if (client == null) {
-                showAlert(AlertType.ERROR, "RECHERCHE", "aucun client trouvé avec ce numero");
-                return;
-            }
+            isNull(client, " ERREUR RECHERCHE", "aucun client trouvé avec ce numero");
+
             surnomFlied.setText(client.getSurnom());
             telField.setText(client.getTelephone());
             adresseField.setText(client.getAdresse());
@@ -172,30 +167,20 @@ public class DetteClient extends BoutiquierController {
     }
 
     private void getArtPayDette(ActionEvent event) {
-        if (dette == null && client == null) {
-            showAlert(AlertType.ERROR, "Error",
-                    "Veuillez d'abord rechercher un client puis recher une de ses dettes.");
-            return;
-        }
+        isNull(dette, "ERREUR LISTE ARTICLE & PAYEMENT",
+                "Veuillez d'abord rechercher une dette d'un client.");
+
+        isNull(client, "ERREUR LISTE ARTICLE & PAYEMENT", "Veuillez d'abord rechercher un client");
 
         String rechercheDette = searchDette.getText();
-        if (rechercheDette.isEmpty()) {
-            showAlert(AlertType.ERROR, "CHAMP VIDE", "veuiller saisir l'id de la dette");
-            return;
-        }
+        isEmpty(rechercheDette, "CHAMP VIDE", "veuiller saisir l'id de la dette");
 
         try {
             Integer id = Integer.parseInt(rechercheDette);
-            if (id == null || id <= 0) {
-                showAlert(AlertType.ERROR, "Form Error!", "L'id doitt être positif.");
-                return;
-            }
+            isPositif(id, "Form Error!", "L'id doitt être positif.");
 
             dette = detteService.getById(id);
-            if (dette == null) {
-                showAlert(AlertType.ERROR, "RECHERCHE", "aucune dette trouvé avec ce id pour ce client");
-                return;
-            }
+            isNull(dette, "ERREUR RECHERCHE", "aucune dette trouvé avec ce id pour ce client");
 
             if (!dette.getClientD().getId().equals(client.getId())) {
                 showAlert(AlertType.ERROR, "Erreur", "Cette dette n'appartient pas au client recherché.");

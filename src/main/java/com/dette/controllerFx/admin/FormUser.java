@@ -40,10 +40,14 @@ public class FormUser extends AdminController {
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
 
-        if (email.isEmpty() || password.isEmpty() || role == null) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please fill all the fields");
-            return;
-        }
+        isEmpty(email, "ERREUR FORM", "Complétez tous les champs");
+        isEmpty(password, "ERREUR FORM", "Complétez tous les champs");
+        isNull(role, "ERREUR FORM", "Complétez tous les champs");
+
+        // if (email.isEmpty() || password.isEmpty() || role == null) {
+        // showAlert(AlertType.ERROR, "Form Error!", "Please fill all the fields");
+        // return;
+        // }
 
         try {
             User newUser = new User(email, password, Role.getRole(role), true);

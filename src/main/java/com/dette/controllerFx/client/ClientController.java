@@ -5,9 +5,6 @@ import java.io.IOException;
 import com.dette.App;
 import com.dette.controllerFx.Controller;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
 public class ClientController extends Controller {
 
     public void showClientMenu() {
@@ -44,7 +41,7 @@ public class ClientController extends Controller {
 
     public void loadDetteRelance() {
         try {
-            App.setRoot("clientVue/relanceDemande");
+            App.setRoot("clientVue/RelancerDette");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,10 +55,4 @@ public class ClientController extends Controller {
         }
     }
 
-    public void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

@@ -82,12 +82,9 @@ public class SetEtatUser extends AdminController {
     }
 
     public void userSearch(ActionEvent event) {
-        String recherche = searchField.getText();
 
-        if (recherche.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "veuillez saisir le login du user");
-            return;
-        }
+        String recherche = searchField.getText();
+        isEmpty(recherche, "ERREUR RECHERCHE", "veuillez saisir le login du user");
 
         try {
             user = userService.getBy(recherche);
@@ -112,10 +109,8 @@ public class SetEtatUser extends AdminController {
     }
 
     public void changeEtat(ActionEvent event) {
-        if (user == null) {
-            showAlert(AlertType.ERROR, "Error", "Veuillez d'abord rechercher un utilisateur.");
-            return;
-        }
+
+        isNull(user, "ERREUR SUBMIT", "Veuillez d'abord rechercher un utilisateur.");
 
         boolean etatUser = user.getEtat();
         boolean switchEtat = toggleSwitch.isSelected();

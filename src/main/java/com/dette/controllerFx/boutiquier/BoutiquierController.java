@@ -5,9 +5,6 @@ import java.io.IOException;
 import com.dette.App;
 import com.dette.controllerFx.Controller;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
 public class BoutiquierController extends Controller {
 
     public void menu() {
@@ -88,10 +85,4 @@ public class BoutiquierController extends Controller {
         }
     }
 
-    public void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

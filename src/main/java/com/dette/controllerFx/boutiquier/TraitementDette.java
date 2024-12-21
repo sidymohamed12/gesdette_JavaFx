@@ -114,16 +114,10 @@ public class TraitementDette extends BoutiquierController {
 
     private void searchDette(ActionEvent event) {
         String recherche = searchDetteField.getText();
-        if (recherche.isEmpty()) {
-            showAlert(AlertType.ERROR, "CHAMP VIDE", "veuiller saisir l'id de la dette");
-            return;
-        }
+        isEmpty(recherche, "CHAMP VIDE", "veuiller saisir l'id de la dette");
 
         Integer id = Integer.parseInt(recherche);
-        if (id < 0 || id == null) {
-            showAlert(AlertType.ERROR, "Form Error!", "L'id doitt être positif.");
-            return;
-        }
+        isPositif(id, "CHAMP RECHERCHE", "l'id est nom valide.");
 
         try {
             dette = detteService.getById(id);
@@ -152,10 +146,8 @@ public class TraitementDette extends BoutiquierController {
     }
 
     private void update(ActionEvent event, Etat etat) {
-        if (dette == null) {
-            showAlert(AlertType.ERROR, "RECHERCHE", "veuilllez d'abord rechercher une dette");
-            return;
-        }
+
+        isNull(dette, "ERREUR UPDATE", "veuilllez d'abord rechercher une dette");
 
         try {
             if (dette.getEtatD() != etat) {

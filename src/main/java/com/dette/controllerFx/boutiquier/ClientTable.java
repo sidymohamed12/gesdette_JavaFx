@@ -61,11 +61,7 @@ public class ClientTable extends BoutiquierController {
 
     private void clientSearch(ActionEvent event) {
         String recherche = searchField.getText();
-
-        if (recherche.isEmpty()) {
-            showAlert(AlertType.ERROR, "CHAMP VIDE", "veuiller saisir un numero");
-            return;
-        }
+        isEmpty(recherche, "CHAMP VIDE", "veuiller saisir le numero du client");
 
         try {
             Client client = clientService.getBy(recherche);

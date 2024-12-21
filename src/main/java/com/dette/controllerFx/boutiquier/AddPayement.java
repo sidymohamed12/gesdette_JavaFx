@@ -111,22 +111,17 @@ public class AddPayement extends BoutiquierController {
     }
 
     private void payement(ActionEvent event) {
-        if (dette == null) {
-            showAlert(AlertType.ERROR, "RECHERCHE", "veuilllez d'abord rechercher une dette");
-            return;
-        }
+
+        isNull(dette, "RECHERCHE DETTE ERROR", "veuilllez d'abord rechercher une dette");
 
         String montant = montantPayement.getText();
-        if (montant.isEmpty()) {
-            showAlert(AlertType.ERROR, "CHAMP VIDE", "veuiller saisir le montant à payer");
-            return;
-        }
 
         try {
 
             Double pay = Double.parseDouble(montant);
-            if (pay < 0 || pay == null || pay > dette.getMontantRestant()) {
-                showAlert(AlertType.ERROR, "Form Error!", "payement impossible verifier le montant saisie");
+            isPositif(pay, "ERREUR FORMULAIRE", "Veuillez entrez un montant valide");
+            if (pay > dette.getMontantRestant()) {
+                showAlert(AlertType.ERROR, "ERREUR FORMULAIRE", "payement impossible verifier le montant saisie");
                 return;
             } else {
                 Payement payement = new Payement();

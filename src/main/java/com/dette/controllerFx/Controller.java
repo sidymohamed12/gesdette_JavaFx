@@ -27,6 +27,9 @@ import com.dette.services.servicespe.IDetteService;
 import com.dette.services.servicespe.IPayementService;
 import com.dette.services.servicespe.IUserService;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class Controller {
     // ----------------------------- FACTORIES -----------------------------
 
@@ -61,5 +64,38 @@ public class Controller {
     protected IDetteService detteService = (DetteService) detteServiceFactory.createService();
     protected IDetailService detailService = (DetailService) detailServiceFactory.createService();
     protected IPayementService payementService = (PayementService) payementServiceFactory.createService();
+
+    // -------------------------- FONCTION COMMUN
+    // ---------------------------------------
+
+    public void showAlert(AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void isNull(Object object, String title, String message) {
+        if (object == null) {
+            showAlert(AlertType.ERROR, title, message);
+            return;
+        }
+    }
+
+    public void isEmpty(String object, String title, String message) {
+        if (object.isEmpty()) {
+            showAlert(AlertType.ERROR, title, message);
+            return;
+        }
+    }
+
+    public void isPositif(Object object, String title, String message) {
+        if (object instanceof Number) {
+            double value = ((Number) object).doubleValue();
+            if (value <= 0) {
+                showAlert(AlertType.ERROR, title, message);
+            }
+        }
+    }
 
 }

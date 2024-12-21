@@ -66,11 +66,7 @@ public class UpdateArticle extends AdminController {
 
     public void articleSearch(ActionEvent event) {
         String recherche = searchField.getText();
-
-        if (recherche.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "veuillez saisir la ref de l'article");
-            return;
-        }
+        isEmpty(recherche, "ERREUR RECHERCHE", "veuillez saisir la ref de l'article");
 
         try {
             article = articleService.getBy(recherche);
@@ -93,32 +89,23 @@ public class UpdateArticle extends AdminController {
     }
 
     public void updateArticle(ActionEvent event) {
-        if (article == null) {
-            showAlert(AlertType.ERROR, "Error",
-                    "Veuillez d'abord rechercher et sélectionner un article à mettre à jour.");
-            return;
-        }
+
+        isNull(article, "ERREUR SUBMIT",
+                "Veuillez d'abord rechercher et sélectionner un article à mettre à jour.");
+
         String newQte = newQteField.getText();
         System.out.println(article);
         System.out.println(newQte);
-        if (newQte.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Entrez une quantité");
-            return;
-        }
 
-        if (newQte.isEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "entrez une quantité");
-            return;
-        }
         try {
             Integer qteInt = Integer.parseInt(newQte);
-            if (qteInt <= 0) {
-                showAlert(AlertType.ERROR, "Form Error!", "entrez une quantité positive");
-                return;
-            }
+            isPositif(qteInt, "SUBMI ERREUR", "entrez une quantité positive");
+
             article.setQteStock(article.getQteStock() + qteInt);
             articleService.modifier(article);
+
             App.setRoot("adminVue/listeArticle");
+
         } catch (NumberFormatException e) {
             showAlert(AlertType.ERROR, "Form Error!",
                     "La quantité doit être numérique.");

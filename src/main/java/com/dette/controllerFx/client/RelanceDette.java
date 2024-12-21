@@ -1,12 +1,13 @@
 package com.dette.controllerFx.client;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.dette.App;
 import com.dette.entities.Article;
 import com.dette.entities.Detail;
 import com.dette.entities.Dette;
-import com.dette.entities.Payement;
 import com.dette.entities.UserConnect;
 import com.dette.enums.Etat;
 
@@ -16,28 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ListeDette extends ClientController {
-
-    // --------------------- INFOS CLIENT -------------------------
-    @FXML
-    private TextField surnomFlied;
-    @FXML
-    private TextField telField;
-    @FXML
-    private TextField adresseField;
-    @FXML
-    private TextField montantField;
-    @FXML
-    private TextField verserField;
-    @FXML
-    private TextField restantField;
-
+public class RelanceDette extends ClientController {
     // --------------------- TABLEAU DETTE -------------------------
 
     @FXML
@@ -86,30 +71,11 @@ public class ListeDette extends ClientController {
     private TableColumn<Detail, Double> qteVenduColumn;
     private ObservableList<Detail> detailList;
 
-    // --------------------- PAYEMENT DETTE -------------------------
+    // --------------------- RELANCEMENT DETTE -------------------------
     @FXML
-    private TableView<Payement> payementTable;
-    @FXML
-    private TableColumn<Payement, Integer> idColumnP;
-    @FXML
-    private TableColumn<Payement, LocalDateTime> dateColumnP;
-    @FXML
-    private TableColumn<Payement, Double> montantColumnP;
-    @FXML
-    private ComboBox<String> selectFiltre;
-
-    private ObservableList<Payement> payementList;
-
-    // ---------------------------------------------------------------
+    private Button resendDette;
 
     public void initialize() {
-
-        System.out.println(UserConnect.getUserConnecte().getClient());
-
-        surnomFlied.setText(UserConnect.getUserConnecte().getClient().getSurnom());
-        telField.setText(UserConnect.getUserConnecte().getClient().getTelephone());
-        adresseField.setText(UserConnect.getUserConnecte().getClient().getAdresse());
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         montantColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
@@ -123,35 +89,30 @@ public class ListeDette extends ClientController {
 
         qteVenduColumn.setCellValueFactory(new PropertyValueFactory<>("qteVendu"));
         totalColumn.setCellValueFactory(new PropertyValueFactory<>("montantVendu"));
-
-        idColumnP.setCellValueFactory(new PropertyValueFactory<>("id"));
-        montantColumnP.setCellValueFactory(new PropertyValueFactory<>("montant"));
-        dateColumnP.setCellValueFactory(new PropertyValueFactory<>("date"));
         listeDette();
-        submitSearchDette.setOnAction(event -> getArtPayDette(event));
+
+        submitSearchDette.setOnAction(event -> getArtDette(event));
+
+        resendDette.setOnAction(event -> resendDetteAnnuler());
     }
 
     private void listeDette() {
         detteList = FXCollections.observableArrayList();
-        for (Dette detteb : dettes) {
-            if (!detteb.getMontantRestant().equals(0.0)
-                    && detteb.getEtatD().equals(Etat.accepter) && !detteb.getArchiver()) {
-                detteList.add(detteb);
+        for (Dette detteL : dettes) {
+            if (detteL.getEtatD().equals(Etat.annuler)) {
+                detteList.add(dette);
             }
         }
         detteTable.setItems(detteList);
-        infosDette(detteList);
     }
 
-    private void getArtPayDette(ActionEvent event) {
+    private void getArtDette(ActionEvent event) {
 
         try {
-            String rechercheDette = searchDette.getText();
-            Integer id = Integer.parseInt(rechercheDette);
-            isPositif(id, "ERREUR RECHERCHE DETTE ID NULL", "L'id doitt être positif.");
+            Integer id = Integer.parseInt(searchDette.getText());
+            isPositif(id, "ERREUR RECHERCHE : DETTE_ID NULL", "L'id doitt être positif.");
 
             dette = detteService.getById(id);
-
             isNull(dette, "RECHERCHE Null", "aucune dette trouvé avec ce id");
 
             if (!dette.getClientD().getId().equals(UserConnect.getUserConnecte().getClient().getId())) {
@@ -159,20 +120,18 @@ public class ListeDette extends ClientController {
                 return;
             }
 
-            if (dette.getEtatD() != Etat.accepter) {
-                showAlert(AlertType.ERROR, "Erreur", "Cette dette n'est pas acceptée.");
+            if (dette.getEtatD() != Etat.annuler) {
+                showAlert(AlertType.ERROR, "Erreur", "Cette dette n'est pas annulée.");
                 return;
             }
+
             List<Article> articles = articleService.getArticlesDette(dette);
-            List<Payement> payments = payementService.getPayementsDette(dette);
             List<Detail> details = detailService.getDetailOfArticleDette(articles, dette);
 
             articleList = FXCollections.observableArrayList(articles);
-            payementList = FXCollections.observableArrayList(payments);
             detailList = FXCollections.observableArrayList(details);
 
             articleTable.setItems(articleList);
-            payementTable.setItems(payementList);
             detailTable.setItems(detailList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,15 +139,28 @@ public class ListeDette extends ClientController {
         }
     }
 
-    private void infosDette(List<Dette> detteAddition) {
-        Double total = 0.0;
-        Double verser = 0.0;
-        for (Dette dette : detteAddition) {
-            total += dette.getMontant();
-            verser += dette.getMontantVerser();
+    private void resendDetteAnnuler() {
+        try {
+
+            isNull(dette, "ERREUR RELANCEMENT",
+                    "aucune dette selectionnée, veuillez d'abord faire une recherce");
+
+            if (!dette.getClientD().getId().equals(UserConnect.getUserConnecte().getClient().getId())) {
+                showAlert(AlertType.ERROR, "Erreur", "Cette dette ne vous appartient pas.");
+                return;
+            }
+            if (dette.getEtatD().equals(Etat.accepter)) {
+                dette.setEtatD(Etat.encours);
+                detteService.modifier(dette);
+                showAlert(AlertType.CONFIRMATION, "Succès", "La dette a été enregistrée avec succès.");
+                App.setRoot("clientVue/listeDemandeDette");
+            } else {
+                showAlert(AlertType.ERROR, "SUBMIT", "Cette dette n'est pas annuler");
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        montantField.setText(total + " FCFA");
-        verserField.setText(verser + " FCFA");
-        restantField.setText((total - verser) + " FCFA");
     }
+
 }

@@ -110,10 +110,9 @@ public class FormDette extends ClientController {
         }
 
         Article article = selectArticle.getValue();
-        if (article == null) {
-            showAlert(AlertType.ERROR, "Erreur", "Veuillez sélectionner un article.");
-            return;
-        }
+
+        isNull(article, "Erreur Article Null", "Veuillez sélectionner un article.");
+
         int qte;
         try {
             qte = Integer.parseInt(qteAchete.getText());
@@ -159,10 +158,7 @@ public class FormDette extends ClientController {
     private void submitDette() {
         try {
 
-            if (details.isEmpty()) {
-                showAlert(AlertType.ERROR, "Erreur", "Aucun article ajouté à la dette.");
-                return;
-            }
+            isNull(details, "Erreur d'articles", "Aucun article ajouté à la dette.");
 
             details.forEach(detail -> {
                 if (detail.getId() != null) {
